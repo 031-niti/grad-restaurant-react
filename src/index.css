@@ -94,3 +94,13 @@ p.card-text{
   width: 87px;
 }
 
+.alert{
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+label{
+  
+ font-weight: 500;
+ margin: 20px 0 0 0;
+}

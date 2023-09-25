@@ -11,7 +11,7 @@ import SignUp from './pages/SignUp';
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar/>
       <div className="App">
         <Routes>
           <Route path='/' element={<Restaurant />}></Route>
