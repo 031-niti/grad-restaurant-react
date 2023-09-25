@@ -21,6 +21,19 @@ const NavBar = () => {
             <Link className="nav-link" to="/search">Search</Link>
           </li>
         </ul>
+
+        {/* Signin SignUp */}
+        <span class="navbar-text">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+            <Link className="nav-link" to="/signin">Signin</Link>
+          </li>
+            <li className="nav-item ">
+              <Link className="nav-link" to="/signup">SignUp</Link>
+            </li>
+          </ul>
+        </span>
+        
       </div>
     </div>
   </nav>

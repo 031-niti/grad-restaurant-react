@@ -27,7 +27,6 @@ const Add = () => {
   }
 
   const handleClick = async (e) =>{
-    
     e.preventDefault();
     try {
       await axios.post(`${URL}/restaurant`,restaurant ,config);
