@@ -77,7 +77,7 @@ const SignUp = () => {
           {/* แสดงข้อความ error ในฟอร์ม ถ้ามี error ใช้ Bootstrap alert */}
           {error && (
             <div className="alert alert-danger" role="alert">
-              ข้อมูลไม่ถูก ไปกรอกใหม่!!
+              กรอกข้อมูลไม่ครบ ไปกรอกใหม่!!
             </div>
           )}
           <Link type="submit" className="btn au btn-success" onClick={handleClick}>Sign Up</Link>

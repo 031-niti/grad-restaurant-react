@@ -21,12 +21,17 @@ function NavBar() {
                             <Link className="nav-link" to="/Search">Search</Link>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <div className='button-search'>
-                          <button class="btn btn-success" type="submit">Search</button>
-                        </div>
-                    </form>
+                    {/* Signin SignUp */}
+                    <span className="navbar-text">
+                      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signin">Sign in</Link>
+                        </li>
+                        <li className="nav-item ">
+                            <Link className="nav-link" to="/signup">Sign up</Link>
+                        </li>
+                      </ul>
+                    </span>
                 </div>
             </div>
         </nav>
