@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,7 +8,7 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: ""
-  });
+  }); 
 
   const navigate = useNavigate();
   const [error, setError] = useState();
@@ -31,20 +30,17 @@ const SignUp = () => {
   };
 
   const handleClick = (e) => {
-    e.preventDefault(); //ใช้ในการยกเลิกการทำงานเริ่มต้น
+    e.preventDefault(); //จะยกเลิกการทำงานเริ่มต้นของ event 
     try {
-      //เช็คว่า user กรอกครบไหม ถ้าไม่จะ error  
+      //เช็คว่าข้อมูลที่ user กรอกครบถ้วนหรือไม่ ถ้าข้อมูลยังไม่ครบ จะตั้งค่า state error เป็น true และให้กลับไปจบฟังก์ชัน
       if (!user.username ||!user.email || !user.password || !user.confirmPassword) {
         setError(true);
         return;
       }
-      setError(false);
-
-      //ทำการ log ข้อมูล user ที่มีค่าเป็น state 
-      console.log("Submitting:", user);
-      alert("สมัครสมาชิกสำเร็จแล้วนะจ้ะ!!");
-      //เมื่อ signup successful จะไปหน้า Signin
-      navigate("/Signin")
+      setError(false); //ถ้าข้อมูลครบถ้วน จะตั้งค่า state error เป็น false เพื่อรีเซ็ตค่าของ state error
+      console.log("Submitting:", user); //ทำการ log ข้อมูล user ที่มีค่าเป็น state 
+      alert("สมัครสมาชิกสำเร็จแล้วนะจ้ะ!!"); //แสดง Alert บอกผู้ใช้ว่าการสมัครสมาชิกสำเร็จ.
+      navigate("/Signin") //เมื่อ signup successful จะไปหน้า Signin
     } catch (error) {
       console.log(error);
       setError(true);      
