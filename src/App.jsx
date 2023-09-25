@@ -1,12 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import NavBar from './components/navbar';
+import NavBar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Restaurant from './pages/Restaurant';
 import Add from './pages/Add';
 import Search from './pages/Search';
 import Update from './pages/Update';
-
-
 
 function App() {
   return (
