@@ -5,7 +5,8 @@ const SignUp = () => {
     const[user, setUser] = useState({
         user : "",
         email : "",
-        password: "",
+        password: ""
+        
       })
 
     const handleCancel = () => {
