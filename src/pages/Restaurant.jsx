@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import axios, { Axios } from 'axios'
 import Card from '../components/Card';
 
-
-
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
 const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
@@ -29,12 +27,14 @@ const Restaurant = () => {
     fetchAllRestaurants();
   },[]);
 
+  
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${URL}/restaurant/${id}`, config)
       window.location.reload();
     } catch (error) {
       console.log(error);
+
     }
   }
 
@@ -43,11 +43,13 @@ const Restaurant = () => {
       <h1>Restaurant</h1>
       <div className="row">
         <div className="restaurants">
+        
           {
             restaurants.map(restaurant => {
               return (
-                <Card restaurant={restaurant} handleDelete={handleDelete} key={restaurant.id}/>
-
+                <Card restaurant={restaurant} 
+                handleDelete={handleDelete}
+                key={restaurant.id}/>
               )
             })
           }

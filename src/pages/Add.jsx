@@ -50,8 +50,8 @@ const Add = () => {
     <div className="container text-center">
       <h1>Grab Restaurant</h1>
       <div className="error">{error && "somthing went wrong !!"}</div>
-      <div className="row form">
-        <form>
+      <div className="form mx-auto">
+        <form className="w-50 mx-auto">
           <h5 className="card-header justify-content-center ">Add new restaurant</h5>
           <div className="md-3">
             <label htmlFor='name' className="form-label">Restaurant name</label>
@@ -65,8 +65,8 @@ const Add = () => {
             <label htmlFor='imageURL' className="form-label">Restaurant ImageURL</label>
             <input className="form-control" name="imageURL" placeholder="Restaurant ImageURL" onChange={handleChange} value={restaurant.imageURL} />
           </div>
-          <Link to="" className="btn btn-success" onClick={handleClick}>Add</Link>
-          <Link to="" className="btn btn-danger" onClick={handleCancel}>Cancel</Link>
+          <Link to="" className="btn au btn-success" onClick={handleClick}>Add</Link>
+          <Link to="" className="btn au btn-danger" onClick={handleCancel}>Cancel</Link>
         </form>
       </div>
     </div>
