@@ -3,19 +3,18 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
     const[user, setUser] = useState({
+      user : "",
+      email : "",
+      password: ""
+    })
+
+    const handleCancel = () => {
+      setUser({
         user : "",
         email : "",
         password: ""
-        
       })
-
-    const handleCancel = () => {
-        setRestaurant({
-        name: "",
-        type: "",
-        imageURL: ""
-        })
-        setError(false);
+      setError(false);
     }  
   return (
     <div className="container text-center">
