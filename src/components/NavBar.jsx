@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { Link } from 'react-router-dom'
+import AuthService from '../service/auth.service'
 
 function NavBar() {
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-tertiary bg-tertiary">
             <div className="container-fluid">
@@ -22,6 +24,7 @@ function NavBar() {
                         </li>
                     </ul>
                     {/* Signin SignUp */}
+                    
                     <span className="navbar-text">
                       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
@@ -29,6 +32,9 @@ function NavBar() {
                         </li>
                         <li className="nav-item ">
                             <Link className="nav-link" to="/signup">Sign up</Link>
+                        </li>
+                        <li className="nav-item ">
+                            <Link className="nav-link" to="/Logout">Log out</Link>
                         </li>
                       </ul>
                     </span>

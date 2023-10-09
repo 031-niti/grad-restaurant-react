@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthService from '../service/auth.service';
 
 
 const SignUp = () => {
@@ -29,20 +30,18 @@ const SignUp = () => {
     setError(false);
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault(); //จะยกเลิกการทำงานเริ่มต้นของ event 
     try {
-      //เช็คว่าข้อมูลที่ user กรอกครบถ้วนหรือไม่ ถ้าข้อมูลยังไม่ครบ จะตั้งค่า state error เป็น true และให้กลับไปจบฟังก์ชัน
-      if (!user.username ||!user.email || !user.password || !user.confirmPassword) {
-        setError(true);
-        return;
+      if (user.confirmPassword === user.password) {
+        const register = await AuthService.register(user.username,user.email,user.password);
+        navigate("/Signin") //เมื่อ signup successful จะไปหน้า Signin
       }
-      setError(false); //ถ้าข้อมูลครบถ้วน จะตั้งค่า state error เป็น false เพื่อรีเซ็ตค่าของ state error
-      console.log("Submitting:", user); //ทำการ log ข้อมูล user ที่มีค่าเป็น state 
-      alert("สมัครสมาชิกสำเร็จแล้วนะจ้ะ!!"); //แสดง Alert บอกผู้ใช้ว่าการสมัครสมาชิกสำเร็จ.
-      navigate("/Signin") //เมื่อ signup successful จะไปหน้า Signin
+      else{
+        alert("")
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError(true);      
     }
   };
@@ -55,7 +54,7 @@ const SignUp = () => {
           <h4 className="card-header justify-content-center ">Sign Up</h4>
           <div className="md-3">
             <label htmlFor="username" className="form-label"> Username</label>
-            <input type="text" className="form-control" name="username" placeholder="Username" value={user.username} onChange={handleInputChange}/>
+            <input type="text" className="form-control" name="username" placeholder="username" value={user.username} onChange={handleInputChange}/>
           </div>
           <div className="md-3">
             <label htmlFor="email" className="form-label"> Email </label>
@@ -70,12 +69,6 @@ const SignUp = () => {
             <input type="text" className="form-control" name="confirmPassword" placeholder="Confirm Password" value={user.confirmPassword} onChange={handleInputChange}/>
           </div>
 
-          {/* แสดงข้อความ error ในฟอร์ม ถ้ามี error ใช้ Bootstrap alert */}
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              กรอกข้อมูลไม่ครบ ไปกรอกใหม่!!
-            </div>
-          )}
           <Link type="submit" className="btn au btn-success" onClick={handleClick}>Sign Up</Link>
           <Link type="button" className="btn au btn-danger" onClick={handleCancel}>Cancel</Link>
         </form>

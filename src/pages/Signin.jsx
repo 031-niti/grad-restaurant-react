@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthService from '../service/auth.service';
 
 const Signin = () => {
   const [user, setUser] = useState({
-    email: "",
+    //ต้องใช้ให้เหมือนกันหลังบ้าน
+    username: "",
     password: "",
   });
 
@@ -15,18 +17,11 @@ const Signin = () => {
     setUser((prevUser) => ({ ...prevUser, [e.target.name]: e.target.value }));
   };
 
-  const handleClick =  (e) => {
+  const handleClick =  async (e) => {
     e.preventDefault(); //จะยกเลิกการทำงานเริ่มต้นของ event 
     try {
-      //เช็คว่าข้อมูลที่ user กรอกครบถ้วนหรือไม่ ถ้าข้อมูลยังไม่ครบ จะตั้งค่า state error เป็น true และให้กลับไปจบฟังก์ชัน  
-      if (!user.email || !user.password) {
-        setError(true);
-        return;
-      }
-      setError(false);
-      console.log("User data:", user); //ทำการ log ข้อมูล user ที่มีค่าเป็น state 
+      const login = await AuthService.login(user.username,user.password);
       navigate("/") //เมื่อ signup successful จะไปหน้าแรก
-      alert("เข้าสู่ระบบสำเร็จแล้วนะจ้ะ!!");
     } catch (error) {
       console.log(error);
       setError(true);      
@@ -35,7 +30,7 @@ const Signin = () => {
   
   const handleCancel = () => {
     setUser({
-      email: "",
+      username: "",
       password: "",
     });
     setError(false);
@@ -48,18 +43,13 @@ const Signin = () => {
       <form className="w-50 mx-auto">
         <h4 className="card-header justify-content-center ">LogIn</h4>
         <div className="md-3">
-          <label htmlFor='email' className="form-label">Email</label>
-          <input type="text" className="form-control" name="email" placeholder="Email" value={user.email} onChange={handleInputChange}/>
+          <label htmlFor='username' className="form-label">Username</label>
+          <input type="text" className="form-control" name="username" placeholder="username" value={user.username} onChange={handleInputChange}/>
         </div>
         <div className="md-3">
           <label htmlFor='password' className="form-label">Password</label>
           <input type="text" className="form-control" name="password" placeholder="Password"value={user.password} onChange={handleInputChange}/>
         </div>
-        {error && (
-            <div className="alert alert-danger" role="alert">
-              ข้อมูลไม่ถูก ไปกรอกใหม่!!
-            </div>
-          )}
         <Link to="" className="btn au btn-success" onClick={handleClick}>Log In</Link>
         <Link to="" className="btn au btn-danger" onClick={handleCancel}>Cancel</Link>    
       </form>
