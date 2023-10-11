@@ -103,3 +103,10 @@ label{
  font-weight: 500;
  margin: 15px 0 0 0;
 }
+
+.username{
+  display: flex;
+  justify-content: center;
+  color: #0f0f0f;
+  font-size: 14px;
+}

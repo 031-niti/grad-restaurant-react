@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../service/auth.service';
+import { useAuthContext } from '../context/AuthContext';
 
 const Signin = () => {
   const [user, setUser] = useState({
@@ -8,11 +9,9 @@ const Signin = () => {
     username: "",
     password: "",
   });
-
   const navigate = useNavigate();
   const [error, setError] = useState();
-
-
+  const {login} = useAuthContext();//ดึง login มาใช้
   const handleInputChange = (e) => {
     setUser((prevUser) => ({ ...prevUser, [e.target.name]: e.target.value }));
   };
@@ -20,8 +19,9 @@ const Signin = () => {
   const handleClick =  async (e) => {
     e.preventDefault(); //จะยกเลิกการทำงานเริ่มต้นของ event 
     try {
-      const login = await AuthService.login(user.username,user.password);
-      navigate("/") //เมื่อ signup successful จะไปหน้าแรก
+      const currentUser = await AuthService.login(user.username,user.password); //เรียก API
+      login(currentUser); //เรียกใช้ login ที่ดึงมาจาก useAuthContext
+      navigate("/"); //เมื่อ signup successful จะไปหน้าแรก
     } catch (error) {
       console.log(error);
       setError(true);      

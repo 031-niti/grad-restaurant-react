@@ -11,20 +11,19 @@ const config = {
     },
 };
 
-const login = async (username,password) => {
-    const response = await axios.post(API_URL + "signin" ,{username,password}, config);
+const login =  async (username, password) =>{
+    const response = await axios.post(API_URL + "signin",{username,password},config);
     if (response.data.accessToken) {
-        //signin success
-        localStorage.setItem("user", JSON.stringify(response))
-        localStorage.setItem("user", JSON.stringify(response.accessToken));
+        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("token", JSON.stringify(response.data.accessToken));
     }
-    return response;
+    return response.data;
 };
 
 const register = async (username,email,password) => {
     return await axios.post(API_URL + "signup", {username,email,password}, config)
 }
-const getCurrentUser = () => {
+const getCurrentUser = () =>{
     return JSON.parse(localStorage.getItem("user"));
 };
 
