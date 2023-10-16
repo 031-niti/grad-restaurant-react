@@ -35,6 +35,7 @@ const SignUp = () => {
     try {
       if (user.confirmPassword === user.password) {
         const register = await AuthService.register(user.username,user.email,user.password);
+        console.log(user);
         navigate("/Signin") //เมื่อ signup successful จะไปหน้า Signin
       }
       else{

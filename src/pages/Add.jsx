@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
+import authHeader from '../service/auth.header';
 
-//ดึง config มาจาก config ไฟล์
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
 const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
@@ -11,6 +11,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
+  headers: authHeader()
 };
 
 const Add = () => {

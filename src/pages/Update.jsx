@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import authHeader from '../service/auth.header';
 
 //ดึง config มาจาก config ไฟล์
 const URL = import.meta.env.VITE_BASE_URL;
@@ -11,6 +12,7 @@ const config = {
         username: USERNAME,
         password: PASSWORD,
     },
+    headers: authHeader()
 };
 const Update = () => {
     const [restaurant, setRestaurant] = useState({
