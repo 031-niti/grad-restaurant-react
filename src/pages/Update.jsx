@@ -12,7 +12,7 @@ const config = {
         username: USERNAME,
         password: PASSWORD,
     },
-    headers: authHeader()
+    headers: authHeader(),
 };
 const Update = () => {
     const [restaurant, setRestaurant] = useState({

@@ -11,7 +11,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
-  headers: authHeader()
+  headers: authHeader(),
 };
 
 const Add = () => {
