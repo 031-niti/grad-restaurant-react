@@ -1,26 +1,16 @@
 import {useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import axios, { Axios } from 'axios'
+import api from "../service/api";
 import Card from '../components/Card';
 import authHeader from '../service/auth.header';
 
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth:{
-    username : USERNAME,
-    password : PASSWORD,
-  },
-  headers: authHeader()
-};
 
 const Restaurant = () => {
   const [restaurants,setRestaurants] = useState([])
   useEffect(()=>{
     const fetchAllRestaurants = async () => {
       try {
-        const res = await axios.get(`${URL}/restaurant`, config)
+        const res = await api.get(`/restaurant`);
         setRestaurants(res.data);
       } catch (error) {
         console.error(error);
@@ -32,7 +22,7 @@ const Restaurant = () => {
   
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${URL}/restaurant/${id}`, config)
+      await api.delete(`/restaurant/${id}`);
       window.location.reload();
     } catch (error) {
       console.log(error);

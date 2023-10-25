@@ -1,19 +1,8 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import authHeader from '../service/auth.header';
+import api from "../service/api";
 
-//ดึง config มาจาก config ไฟล์
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-    auth: {
-        username: USERNAME,
-        password: PASSWORD,
-    },
-    headers: authHeader(),
-};
 const Update = () => {
     const [restaurant, setRestaurant] = useState({
         name: "",
@@ -30,7 +19,9 @@ const Update = () => {
     useEffect(() => {
         const fetchAllRestaurants = async () => {
             try {
-                const res = await axios.get(`${URL}/restaurant/${restaurantId }`, config );
+                const res = await api.get(
+                  `/restaurant/${restaurantId}`
+                );
                 setRestaurant(res.data); // update state
             } catch (error) {
                 console.error(error);
@@ -43,7 +34,10 @@ const Update = () => {
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${URL}/restaurant/${restaurantId}`, restaurant, config);
+            await api.put(
+              `/restaurant/${restaurantId}`,
+              restaurant
+            );
             navigate("/")
         } catch (error) {
             console.log(error);

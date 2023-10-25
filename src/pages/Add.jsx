@@ -1,18 +1,7 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import authHeader from '../service/auth.header';
-
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth: {
-    username: USERNAME,
-    password: PASSWORD,
-  },
-  headers: authHeader(),
-};
+import api from '../service/api'
 
 const Add = () => {
   const[restaurant, setRestaurant] = useState({
@@ -30,7 +19,7 @@ const Add = () => {
   const handleClick = async (e) =>{
     e.preventDefault();
     try {
-      await axios.post(`${URL}/restaurant`,restaurant ,config);
+      await api.post(`/restaurant`, restaurant);
       navigate("/")
     } catch (error) {
       console.log(error);

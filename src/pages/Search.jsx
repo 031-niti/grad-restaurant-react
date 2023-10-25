@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from "../service/api";
 import { Link } from 'react-router-dom'
 
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-    auth: {
-        username: USERNAME,
-        password: PASSWORD,
-    },
-};
 
 const Search = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -24,9 +15,9 @@ const Search = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`${url}/restaurants`, {
+      const response = await api.get(`/restaurants`, {
         params: {
-        search: searchTerm,
+          search: searchTerm,
         },
       });
       setRestaurants(response.data);
