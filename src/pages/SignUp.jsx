@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../service/auth.service';
-
+import Londing from "../components/Londing";
+import * as londingData from "../londing/Animation - 1698821869094.json";
 
 const SignUp = () => {
+   const [loading, setLoading] = useState(true);
+   useEffect(() => {
+     setTimeout(() => {
+       setLoading(false); // กำหนดค่า loading เป็น false เมื่อการดำเนินการเสร็จสิ้น
+     }, 500);
+   }, []);
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: ""
   }); 
-
   const navigate = useNavigate();
   const [error, setError] = useState();
 
@@ -48,33 +54,89 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container text-center">
-      <h1>Grab Restaurant</h1>
-      <div className="form mx-auto">
-        <form className="w-50 mx-auto" >
-          <h4 className="card-header justify-content-center ">Sign Up</h4>
-          <div className="md-3">
-            <label htmlFor="username" className="form-label"> Username</label>
-            <input type="text" className="form-control" name="username" placeholder="username" value={user.username} onChange={handleInputChange}/>
-          </div>
-          <div className="md-3">
-            <label htmlFor="email" className="form-label"> Email </label>
-            <input type="text" className="form-control" name="email" placeholder="Email"value={user.email}onChange={handleInputChange}/>
-          </div>
-          <div className="md-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input type="text" className="form-control" name="password" placeholder="Password" value={user.password} onChange={handleInputChange}/>
-          </div>
-          <div className="md-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-            <input type="text" className="form-control" name="confirmPassword" placeholder="Confirm Password" value={user.confirmPassword} onChange={handleInputChange}/>
-          </div>
+    <>
+      {loading ? (
+        <Londing animation={londingData} />
+      ) : (
+        <div className="container text-center">
+          <h1>Grab Restaurant</h1>
+          <div className="form mx-auto">
+            <form className="w-50 mx-auto">
+              <h4 className="card-header justify-content-center ">Sign Up</h4>
+              <div className="md-3">
+                <label htmlFor="username" className="form-label">
+                  {" "}
+                  Username
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="username"
+                  placeholder="username"
+                  value={user.username}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="md-3">
+                <label htmlFor="email" className="form-label">
+                  {" "}
+                  Email{" "}
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="email"
+                  placeholder="Email"
+                  value={user.email}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="md-3">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="password"
+                  placeholder="Password"
+                  value={user.password}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="md-3">
+                <label htmlFor="confirmPassword" className="form-label">
+                  Confirm Password
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="confirmPassword"
+                  placeholder="Confirm Password"
+                  value={user.confirmPassword}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-          <Link type="submit" className="btn au btn-success" onClick={handleClick}>Sign Up</Link>
-          <Link type="button" className="btn au btn-danger" onClick={handleCancel}>Cancel</Link>
-        </form>
-      </div>
-    </div>
+              <Link
+                type="submit"
+                className="btn au btn-success"
+                onClick={handleClick}
+              >
+                Sign Up
+              </Link>
+              <Link
+                type="button"
+                className="btn au btn-danger"
+                onClick={handleCancel}
+              >
+                Cancel
+              </Link>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
